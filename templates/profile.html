@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% with messages=get_flashed_messages() %}
+    {%if messages%}
+    <p>{{messages[0]}}</p>
+    {% endif %}
+    {% endwith  %}
+    <form  action="/update" method="post">
+      <input type="text" name="name1" value="{{a['name1'] if a['name1']}}" required readonly>
+      <input type="text" name="name2" value="{{a['name2'] if a['name2']}}" required readonly>
+      <input type="email" name="mail" value="{{a['mail'] if a['mail']}}" required readonly>
+      <input type="text" name="mobile" value="{{a['mobile'] if a['mobile']}}" required>
+      <input type="text" name="clg" value="{{a['clg'] if a['clg']}}" required placeholder="College*">
+      <input type="text" name="branch" value="{{a['branch'] if a['branch']}}" required placeholder="Branch*">
+      <input type="text" name="languages" value="{{a['languages'] if a['languages']}}" required placeholder="Languages*">
+      <input type="text" name="tech1" value="{{a['tech1'] if a['tech1']}}" required placeholder="Technology1*">
+      <input type="text" name="tech2" value="{{a['tech2'] if a['tech2']}}" placeholder="Technology2" >
+      <input type="text" name="age" value="{{a['age'] if a['age']}}" required placeholder="Age*">
+      <input type="text" name="grad" value="{{a['grad'] if a['grad']}}" required placeholder="Graduation Year*">
+      <button type="submit" name="button">Update</button>
+    </form>
+  </body>
+</html>

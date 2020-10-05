@@ -2,22 +2,29 @@ from flask import Flask, redirect, url_for,session,request,render_template,sessi
 import smtplib
 import random
 from pymongo import MongoClient
-
+import datetime
 cluster=MongoClient('mongodb+srv://hiring:hysea@cluster0.pxm7e.mongodb.net/hiring?retryWrites=true&w=majority')
 
 db = cluster['Hysea']
 
 profile = db['Profile']
+jobs = db['jobs']
+applications = db['applications']
 
 app=Flask(__name__)
 app.secret_key = 'abc'
-def users(name1,name2,mail,mobile,ver,otp,clg=None,branch=None,languages=None,tech1=None,tech2=None,age=None,grad=None):
-    doc = {"name1":name1,"name2":name2,"mail":mail,"mobile":mobile,"ver":ver,"otp":otp,"clg":clg,"branch":branch,"languages":languages,"tech1":tech1,"tech2":tech2,"age":age,"grad":grad}
+def users(name1,name2,mail,mobile,ver,otp,clg=None,branch=None,languages=None,tech1=None,tech2=None,age=None,grad=None,password=None):
+    doc = {"name1":name1,"name2":name2,"mail":mail,"mobile":mobile,"ver":ver,"otp":otp,"clg":clg,"branch":branch,"languages":languages,"tech1":tech1,"tech2":tech2,"age":age,"grad":grad,"password":password}
     x = profile.insert_one(doc)
 @app.route('/')
 def home():
+    a = list(jobs.find())
+    #print(a)
     print(session)
-    return render_template('index.html')
+    if 'user' in session:
+        return render_template('home.html',a = a,cre = True)
+    else:
+        return render_template('home.html',a=a)
 
 @app.route('/signup',methods=["GET","POST"])
 def signup():
@@ -98,11 +105,55 @@ def login():
             if f["password"] == request.form['pas']:
                 session['user'] = f["name1"]
                 session['password'] = f["password"]
-                return render_template('order.html')
+                return redirect(url_for('update'))
         flash('Invalid Password')
         render_template('index.html')
 
     return render_template('index.html')
+@app.route('/update',methods=['GET','POST'])
+def update():
+    if request.method == 'POST':
+        a = {"clg":request.form['clg'],"branch":request.form['branch'],"languages":request.form['languages'],"tech1":request.form['tech1'],"tech2":request.form['tech2'],"age":request.form['age'],"grad":request.form['grad']}
+        profile.update_one({"mail":session['mail']},{"$set":a})
+        flash('Details Updated successfully')
+        return redirect(url_for('update'))
+    else:
+        return render_template('profile.html',a= profile.find_one({"mail":session['mail']}))
+@app.route('/create',methods=['GET','POST'])
+def create():
+    if request.method == 'POST':
+        li = list(jobs.find({"mail":session['mail']}))
+        a = {"_id": (session['mail']+str(len(li))),"name":request.form["name"],"place":request.form["place"],"exp":request.form["exp"],"desc":request.form["desc"],"skill":request.form["skill"],"date":request.form["date"],"span":request.form["span"],"sdate":request.form["sdate"]}
+        flash('Created successfully')
+        x = jobs.insert_one(a);
+        return redirect(url_for('create'))
+    else:
+        return render_template('create.html')
+@app.route('/logout')
+def logout():
+    session.pop(session['user'],None)
+    session.pop(session['mail'],None)
+    session.pop(session['password'],None)
+    print(session)
+    return redirect(url_for('home'))
+@app.route('/<name>',methods=['GET','POST'])
+def apply(name):
+    f = jobs.find({"_id":name})
+    #print(list(f),'hello')
+    if f ==None:
+        f = profile.find_one({'mail':name})
+        if f !=None:
+            return render_template('display.html',f = list(f))
+    else:
+        if request.method =='POST':
+            x = datetime.datetime.now()
+            ap = applications.insert_one({'job_id':name,'applicant':session['mail'],'applied_on':(str(x.day)+'-'+str(x.month)+'-'+str(x.year))})
+            flash('Application Submitted')
+        else:
+            f = profile.find_one({'mail':session['mail']})
+            return render_template('display.html',f = f,st = True,n = name)
+    return redirect(url_for('home'))
+
 #
 # @app.route('/order',methods=['GET','POST'])
 # def order():

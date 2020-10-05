@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Submit</title>
+  </head>
+  <body>
+  
+    <p>{{f['name1']}}</p>
+    <p>{{f['name2']}}</p>
+    <p>{{f['email']}}</p>
+    <p>{{f['mobile']}}</p>
+    <p>{{f['clg']}}</p>
+    <p>{{f['branch']}}</p>
+    <p>{{f['languages']}}</p>
+    <p>{{f['tech1']}}</p>
+    <p>{{f['tech2']}}</p>
+    <p>{{f['age']}}</p>
+    <p>{{f['grad']}}</p>
+    {%if st%}
+    <form  action="/{{n}}" method="post">
+      <button type="submit" name="button">Apply</button>
+    </form>
+    {%endif%}
+  </body>
+</html>

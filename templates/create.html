@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% with messages=get_flashed_messages() %}
+    {%if messages%}
+    <p>{{messages[0]}}</p>
+    {% endif %}
+    {% endwith  %}
+    <form  action="/create" method="post">
+      <input type="text" name="name" placeholder="Job Title" required >
+      <input type="text" name="place" placeholder="Place of work" required >
+      <input type="text" name="exp" placeholder="Work experience" required >
+      <input type="text" name="desc" placeholder="Job Description" required>
+      <input type="text" name="skill" placeholder="Skill Requirements" required >
+      <input type="date" name="date" placeholder="Last date to apply" required >
+      <input type="text" name="span"  required placeholder="Job Duration*">
+      <input type="date" name="sdate" placeholder="Job Start date" required >
+      <button type="submit" name="button">Update</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+  </head>
+  <body>
+    {% with messages=get_flashed_messages() %}
+    {%if messages%}
+    <p>{{messages[0]}}</p>
+    {% endif %}
+    {% endwith  %}
+    {%if cre%}
+    <a href="/create"><button type="button" name="button">Create Job</button></a>
+    {%endif%}
+    {% for a1 in a%}
+    <p>{{a1['name']}}</p>
+    <p>{{a1['exp']}}</p>
+    <p>{{a1['desc']}}</p>
+    <p>{{a1['skill']}}</p>
+    <p>{{a1['date']}}</p>
+    <p>{{a1['span']}}</p>
+    <p>{{a1['sdate']}}</p>
+    {%if cre%}
+    <a href="/{{a1['_id']}}">
+      <button type="button" name="button">Apply</button>
+    </a>
+    {%endif%}
+    {%endfor%}
+  </body>
+</html>
