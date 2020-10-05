@@ -2,11 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Submit</title>
+    <title>Applied Candidate Details</title>
+    <!-- Bootstrap Css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
   </head>
   <body>
-  
-    <p>{{f['name1']}}</p>
+    <!-- <p>{{f['name1']}}</p>
     <p>{{f['name2']}}</p>
     <p>{{f['email']}}</p>
     <p>{{f['mobile']}}</p>
@@ -16,11 +18,76 @@
     <p>{{f['tech1']}}</p>
     <p>{{f['tech2']}}</p>
     <p>{{f['age']}}</p>
-    <p>{{f['grad']}}</p>
-    {%if st%}
+    <p>{{f['grad']}}</p> -->
+
+
+    <div class="parent m-5 w-50 mx-auto" style="background-color:#f5f5f5">
+      <h2 class="text-center">Applied Candidate Details</h2>
+                <table class="table table-borderless table-info ">
+                    <tr class="form-group ">
+                        <td ><label for="name1" class="form-label">Name1</label></td>
+                        <td><p>{{f['name1']}}</p></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="name2"  class="form-label">Name2</label></td>
+                        <td><p>{{f['name2']}}</p></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="mail"  class="form-label">Mail</label></td>
+                        <td><p>{{f['email']}}</p></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="mobile"  class="form-label">Mobile</label></td>
+                        <td><p>{{f['mobile']}}</p></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="clg"  class="form-label">College</label></td>
+                        <td><p>{{f['clg']}}</p></td>
+                    <tr class="form-group">
+                        <td><label for="branch"  class="form-label">Branch</label></td>
+                        <td><p>{{f['branch']}}</p></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="languages"  class="form-label">Languages</label></td>
+                        <td><p>{{f['languages']}}</p></td>
+                    <tr class="form-group">
+                        <td><label for="tech1"  class="form-label">Technology1</label></td>
+                        <td><p>{{f['tech1']}}</p></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="tech2"  class="form-label">Technology2</label></td>
+                        <td><p>{{f['tech2']}}</p></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="age"  class="form-label">Age</label></td>
+                        <td><p>{{f['age']}}</p></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="grad"  class="form-label">Graduation Year</label></td>
+                        <td><p>{{f['grad']}}</p></td>
+                    </tr>
+                    <tr class="form-group">
+                      {%if st%}
+                      <form  action="/{{n}}" method="post">
+                        <td></td>
+                        <td>
+                            <button type="submit" name="button" class="btn btn-success btn-lg mx-auto">Select Candidate</button>
+                        </td>
+                      </form>
+                      {%endif%}
+                    </tr>
+                </table>
+        </div>
+
+    <!-- {%if st%}
     <form  action="/{{n}}" method="post">
       <button type="submit" name="button">Apply</button>
     </form>
-    {%endif%}
+    {%endif%} -->
+
+    <!-- Bootstrap Script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </body>
 </html>

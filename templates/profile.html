@@ -2,7 +2,9 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Profile</title>
+    <!-- Bootstrap Css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
   <body>
     {% with messages=get_flashed_messages() %}
@@ -10,7 +12,7 @@
     <p>{{messages[0]}}</p>
     {% endif %}
     {% endwith  %}
-    <form  action="/update" method="post">
+    <!-- <form  action="/update" method="post">
       <input type="text" name="name1" value="{{a['name1'] if a['name1']}}" required readonly>
       <input type="text" name="name2" value="{{a['name2'] if a['name2']}}" required readonly>
       <input type="email" name="mail" value="{{a['mail'] if a['mail']}}" required readonly>
@@ -23,6 +25,67 @@
       <input type="text" name="age" value="{{a['age'] if a['age']}}" required placeholder="Age*">
       <input type="text" name="grad" value="{{a['grad'] if a['grad']}}" required placeholder="Graduation Year*">
       <button type="submit" name="button">Update</button>
-    </form>
+    </form> -->
+    <div class="parent m-5 w-50 mx-auto" style="background-color:#f5f5f5">
+      <h2 class="text-center">Update your Profile</h2>
+            <form  action="/update" method="post">
+                <table class="table table-borderless table-info ">
+                    <tr class="form-group ">
+                        <td ><label for="name1" class="form-label">name1</label></td>
+                        <td><input type="text" name="name1" id="name1" class="form-control" placeholder="name1" value="{{a['name1'] if a['name1']}}" required readonly></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="name2"  class="form-label">name2</label></td>
+                        <td><input type="text" name="name2" id="name2" class="form-control" placeholder="name2" value="{{a['name2'] if a['name2']}}" required readonly></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="mail"  class="form-label">mail</label></td>
+                        <td><input type="email" name="mail" id="mail" class="form-control" placeholder="mail"value="{{a['mail'] if a['mail']}}" required readonly></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="mobile"  class="form-label">mobile</label></td>
+                        <td><input type="text" name="mobile" id="mobile" class="form-control" placeholder="mobile" value="{{a['mobile'] if a['mobile']}}" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="clg"  class="form-label">College*</label></td>
+                        <td><input type="text" name="clg" id="clg" class="form-control" placeholder="College" value="{{a['clg'] if a['clg']}}" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="branch"  class="form-label">Branch*</label></td>
+                        <td><input type="text" name="branch" id="branch" class="form-control" placeholder="Branch" value=value="{{a['branch'] if a['branch']}}" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="languages"  class="form-label">Languages*</label></td>
+                        <td><input type="text" name="languages" id="languages" class="form-control" placeholder="Languages" value="{{a['languages'] if a['languages']}}" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="tech1"  class="form-label">Technology1*</label></td>
+                        <td><input type="text" name="tech1" id="tech1" class="form-control" placeholder="Technology1" value="{{a['tech1'] if a['tech1']}}" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="tech2"  class="form-label">Technology2</label></td>
+                        <td><input type="text" name="tech2" id="tech2" class="form-control" placeholder="Technology2" value="{{a['tech2'] if a['tech2']}}" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="age"  class="form-label">Age*</label></td>
+                        <td><input type="text" name="age" id="age" class="form-control" placeholder="Age" value="{{a['age'] if a['age']}}" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="grad"  class="form-label">Graduation Year*</label></td>
+                        <td><input type="text" name="grad" id="grad" class="form-control" placeholder="Graduation Year" value="{{a['grad'] if a['grad']}}" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td></td>
+                        <td>
+                            <button type="submit" name="button" class="btn btn-success btn-lg float-right">Update</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    <!-- Bootstrap Script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </body>
 </html>

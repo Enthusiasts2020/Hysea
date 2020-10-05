@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <!-- Bootstrap Css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
   <body>
     {% with messages=get_flashed_messages() %}
@@ -10,7 +12,7 @@
     <p>{{messages[0]}}</p>
     {% endif %}
     {% endwith  %}
-    <form  action="/create" method="post">
+    <!-- <form  action="/create" method="post">
       <input type="text" name="name" placeholder="Job Title" required >
       <input type="text" name="place" placeholder="Place of work" required >
       <input type="text" name="exp" placeholder="Work experience" required >
@@ -20,6 +22,56 @@
       <input type="text" name="span"  required placeholder="Job Duration*">
       <input type="date" name="sdate" placeholder="Job Start date" required >
       <button type="submit" name="button">Update</button>
-    </form>
+    </form> -->
+    <div class="parent m-5 w-50 mx-auto" style="background-color:#f5f5f5">
+      <h2 class="text-center">Create a new Job Application</h2>
+            <form  action="/create" method="post">
+                <table class="table table-borderless table-info ">
+                    <tr class="form-group ">
+                        <td ><label for="name" class="form-label">Job Title</label></td>
+                        <td><input type="text" name="name" id="name" class="form-control" placeholder="Job Title" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="place"  class="form-label">Location</label></td>
+                        <td><input type="text" name="place" id="place" class="form-control" placeholder="Place of work" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="exp"  class="form-label">Work experience</label></td>
+                        <td><input type="text" name="exp" id="exp" class="form-control" placeholder="Work experience" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="desc"  class="form-label">Job Description</label></td>
+                        <td><input type="text" name="desc" id="desc" class="form-control" placeholder="Job Description" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="skill"  class="form-label">Skill Requirements</label></td>
+                        <td><input type="text" name="skill" id="skill" class="form-control" placeholder="Skill Requirements" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="date"  class="form-label">Last date to apply</label></td>
+                        <td><input type="date" name="date" id="date" class="form-control" placeholder="Last date to apply" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="span"  class="form-label">Job Duration*</label></td>
+                        <td><input type="text" name="span" id="span" class="form-control" placeholder="Job Duration" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td><label for="sdate"  class="form-label">Job Start date</label></td>
+                        <td><input type="date" name="sdate" id="sdate" class="form-control" placeholder="Job Start date" required></td>
+                    </tr>
+                    <tr class="form-group">
+                        <td></td>
+                        <td>
+                            <button type="submit" name="button" class="btn btn-success btn-lg float-right">Create</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    <!-- Bootstrap Script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </body>
 </html>
