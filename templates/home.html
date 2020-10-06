@@ -1,37 +1,290 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Home</title>
-  </head>
-  <body>
-    {% with messages=get_flashed_messages() %}
-    {%if messages%}
-    <p>{{messages[0]}}</p>
-    {% endif %}
-    {% endwith  %}
-    {%if app%}
-    <a href="/create"><button type="button" name="button">Create Job</button></a>
-    {%endif%}
-    {% for a1 in a%}
-    <p>{{a1['name']}}</p>
-    <p>{{a1['exp']}}</p>
-    <p>{{a1['desc']}}</p>
-    <p>{{a1['skill']}}</p>
-    <p>{{a1['date']}}</p>
-    <p>{{a1['span']}}</p>
-    <p>{{a1['sdate']}}</p>
+{% extends "main.html" %}
+{% block title %}Home Page{% endblock%}
 
-    {%if app%}
+{%block body%}
+
+
+      <!-- About us Section -->
+      <div class="pl-5 ml-5">
+        <h1 class="display-4" id="aboutus">We provide</h1>
+        <br />
+        <ul>
+          <li><a href="#" class="text-dark">Internships</a></li>
+          <li><a href="#" class="text-dark">Work from home Services</a></li>
+          <li><a href="#" class="text-dark">Fresher Jobs</a></li>
+          <li><a href="#" class="text-dark">Online Trainings</a></li>
+        </ul>
+      </div>
+
+      <br /><br />
+      <div class="row ml-5 card-deck">
+        {%for a1 in a%}
+        <div class="col-sm-6 col-lg-4 col-content ">
+          <!-- Card 1 -->
+
+          <div class="card">
+            <div class="card-header" style="color: #2e279d">
+              <h4 style="text-align: left" class="">{{a1['name']}}</h4>
+            </div>
+            <div class="card-body">
+              <h5 class="text-left">Requirements :</h5>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a href="#" class="nav-link p-0 text-dark text-left"
+                    >{{a1['skill']}}</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link p-0 text-dark text-left"
+                    >Place : {{a1['place']}} </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link p-0 text-dark text-left"
+                    >Experience : {{a1['exp']}}</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link p-0 text-dark text-left"
+                    >Description : {{a1['desc']}}</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link p-0 text-dark text-left"
+                    >Last date : {{a1['date']}}</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link p-0 text-dark text-left"
+                    >Last date : {{a1['sdate']}}</a
+                  >
+                </li>
+              </ul>
+
+              <br />
+              <h5 class="text-left">Stipend :</h5>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a href="#" class="nav-link p-0 text-dark text-left"
+                    >No stipend provided</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <br />
+            {%if app%}
     <a href="/{{a1['_id']}}">
-      <button type="button" name="button">View</button>
+      <button class="block" type="button" name="button">View</button>
     </a>
     {%endif%}
     {%if cre%}
     <a href="/{{a1['_id']}}">
-      <button type="button" name="button">Apply</button>
+      <button class="block" type="button" name="button">Apply</button>
     </a>
     {%endif%}
-    {%endfor%}
-  </body>
-</html>
+
+          </div>
+
+        </div>
+          {%endfor%}
+      </div>
+
+      <!-- <br /><br /> -->
+      <div
+        class="jumbotron text-center text-white internships bg-dark mb-0 bold ml-4"
+        id="internshipsection"
+      >
+        <div class="row">
+          <div class="col-sm-6 col-lg-3">
+            <p style="font-weight: bold">Internships by places</p>
+            <ul class="text-left navbar-nav pl-4">
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Internship in India</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Internship in Delhi</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Internship in Bangalore</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Internship in Hyderabad</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Internship in Mumbai</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Internship in Chennai</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Internship in Gurgaon</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Internship in Kolkata</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Virtual Internship</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-sm-6 col-lg-3">
+            <p style="font-weight: bold">Internship by Stream</p>
+            <ul class="text-left navbar-nav pl-4">
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Computer Science Internship</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Electronics Internship</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Mechanical Internship</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Civil Internship</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Marketing Internship</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Chemical Internship</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Finance Internship</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Summer Research Fellowship</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Campus Ambassador Program</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <p style="font-weight: bold">Online Trainings</p>
+            <ul class="text-left navbar-nav pl-4">
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Web Development</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Programming with C & C++</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Android App Development</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Programming with Python</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Data Science</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Ethical Hacking</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Core Java</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Digital Marketing</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Advanced Excel</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <p style="font-weight: bold">About Hackmania</p>
+            <ul class="text-left navbar-nav pl-4">
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">About us</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">We're hiring</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Hire interns for your company</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Team Diary</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Our Services</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white"
+                  >Terms & Conditions</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Privacy</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link p-0 text-white">Contact us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+    <!--Bootstrap JS, Popper.js, and jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  {%endblock%}

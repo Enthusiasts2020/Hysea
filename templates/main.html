@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Bootstrap Css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/7654ab4b19.js" crossorigin="anonymous"></script>
+    <!-- googlefonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;600;700;800;900&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS link -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <!-- Font-awesome icons-->
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
+    <!-- CSS code -->
+    <style>
+      body {
+        background-image: linear-gradient(to right, skyblue, white);
+      }
+
+      .block {
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+      }
+      .block:hover {
+        background-color: #c5fad9;
+        color: black;
+      }
+
+      .card {
+        width: 270px;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+      .card:hover {
+        box-shadow: 0px 4px 6px black;
+      }
+      .col-content {
+        text-align: center;
+      }
+      .internships {
+        border-radius: 0;
+      }
+      .pro:hover {
+        background-color: grey;
+        color: white;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 50px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+
+      .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+      }
+
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+    </style>
+    {%block style%}{%endblock%}
+  </head>
+  <body>
+    <div class="sidenav">
+      <a href="/" style="padding: 5px 0px 0px 6px"
+        ><i class="fas fa-home-lg-alt"></i>
+        <p style="font-size: 10px">Home</p>
+      </a>
+
+      <a href="#about" style="padding: 5px 0px 0px 6px"
+        ><i class="fas fa-paper-plane"></i>
+        <p style="font-size: 10px">Chat</p>
+      </a>
+
+      <a href="/create" style="padding: 5px 0px 0px 7px"
+        ><i class="fas fa-plus-square"></i>
+        <p style="font-size: 10px">Post</p>
+      </a>
+
+      <a href="/" style="padding: 5px 0px 0px 7px"
+        ><i class="fas fa-user-hard-hat"></i>
+        <p style="font-size: 10px">Jobs</p>
+      </a>
+      <a href="/" style="padding: 5px 0px 0px 3px"
+        ><i class="fas fa-analytics"></i>
+        <p style="font-size: 10px">Internship</p>
+      </a>
+    </div>
+
+          <!-- Navbar -->
+
+          <div class="navbar navbar-expand-sm bg-dark navbar-dark ml-5">
+            <!-- LOGO -->
+            <a href="#" class="navbar-brand p-2">HACKMANIA</a>
+            <!-- Navbar-button -->
+            <button
+              data-toggle="collapse"
+              class="navbar-toggler"
+              data-target="#menu-content"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="menu-content" class="collapse navbar-collapse">
+              <ul class="navbar-nav ml-auto">
+                {%if 'user' in session%}
+                <li class="nav-item pr-4">
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-secondary dropdown-toggle nav-link"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-user"></i>
+                    </button>
+                    <div
+                      class="dropdown-menu"
+                      style="background-color: white"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <a class="dropdown-item pro" href="#">
+                        <i class="fas fa-user fa-5x"></i>
+                        <h4 class="mt-2">{{session['user']}}</h4>
+                      </a>
+                      <a class="dropdown-item pro" href="/update"
+                        ><i class="fas fa-user-edit mr-2"></i>My profile</a
+                      >
+                      <a class="dropdown-item pro" href="/logout"
+                        ><i class="fas fa-power-off mr-2"></i>Log out</a
+                      >
+                    </div>
+                  </div>
+                </li>
+                {%else%}
+                <li class="nav-item pr-3">
+                  <a href="/login" class="nav-link">Log in</a>
+                </li>
+                {%endif%}
+                <li class="nav-item">
+                  <form class="form-inline">
+                    <input
+                      class="form-control mr-sm-2"
+                      type="search"
+                      placeholder="Search"
+                      aria-label="Search"
+                    />
+                    <button
+                      class="btn btn-sm btn-outline-secondary my-sm-0"
+                      type="submit"
+                    >
+                      <span><i class="fas fa-search"></i></span>
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <br /><br />
+
+    {%block body%}{%endblock%}
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+
+    <!-- Footer Section -->
+    <footer>
+      <!-- Contact us Section -->
+      <div
+        class="jumbotron mb-0 text-center"
+        id="contactus"
+        style="font-weight: 500; background-color: #e8e8e8"
+      >
+        Contact us at
+        <br /><br />
+        <i class="fab fa-linkedin-in fa-2x mr-2"></i>
+        <i class="fab fa-github fa-2x mr-3 ml-1"></i>
+        <i class="fab fa-instagram fa-2x mr-3"></i>
+        <i class="far fa-envelope fa-2x mr-3 mr-1"></i>
+        <i class="fab fa-twitter fa-2x ml2"></i>
+      </div>
+    </footer>
+</html>

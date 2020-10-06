@@ -1,12 +1,55 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Profile</title>
-    <!-- Bootstrap Css -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  </head>
-  <body>
+{% extends "main.html" %}
+{% block title %}Profile{% endblock%}
+{%block style%}
+    <!-- CSS STYLESHEETS -->
+    <style media="screen">
+    /* Headings */
+    body {
+            background-color: #f5f5f5;
+          }
+    h1{
+      font-size: 3em;
+      font-family: 'Roboto', sans-serif;
+      color: #343a40;
+      font-weight: 900;
+    }
+    h2{
+      font-size: 2em;
+      font-family: 'Roboto', sans-serif;
+      color: #343a40;
+      font-weight: 700;
+    }
+    h5,h3,h4{
+      font-family: 'Roboto', sans-serif;
+      color: #343a40 ;
+
+    }
+    label{
+      font-family: 'Roboto', sans-serif;
+      color: #343a40 ;
+      font-size: 1.25em;
+      text-align: right;
+    }
+
+    p{
+      font-family: 'Montserrat', sans-serif;
+      color: #343a40 ;
+      font-size: 1.25em;
+      font-weight:500;
+    }
+    span{
+      font-family: 'Roboto', sans-serif;
+      color: #343a40 ;
+    }
+    a{
+      color:black ;
+    }
+    a:hover{
+      color: black ;
+    }
+    </style>
+    {%endblock%}
+  {%block body%}
     {% with messages=get_flashed_messages() %}
     {%if messages%}
     <p>{{messages[0]}}</p>
@@ -44,15 +87,16 @@
                     </tr>
                     <tr class="form-group">
                         <td><label for="mobile"  class="form-label">Mobile :</label></td>
-                        <td><input type="text" name="mobile" id="mobile" class="form-control" placeholder="mobile" value="{{a['mobile'] if a['mobile']}}" required></td>
+                        <td><input type="text" name="mobile" id="mobile" class="form-control" placeholder="mobile" value="{{a['mobile'] if a['mobile']}}" required readonly></td>
                     </tr>
+                    {%if b == 'stu'%}
                     <tr class="form-group">
                         <td><label for="clg"  class="form-label">College* :</label></td>
                         <td><input type="text" name="clg" id="clg" class="form-control" placeholder="College" value="{{a['clg'] if a['clg']}}" required></td>
                     </tr>
                     <tr class="form-group">
                         <td><label for="branch"  class="form-label">Branch* :</label></td>
-                        <td><input type="text" name="branch" id="branch" class="form-control" placeholder="Branch" value=value="{{a['branch'] if a['branch']}}" required></td>
+                        <td><input type="text" name="branch" id="branch" class="form-control" placeholder="Branch" value="{{a['branch'] if a['branch']}}" required></td>
                     </tr>
                     <tr class="form-group">
                         <td><label for="languages"  class="form-label">Languages* :</label></td>
@@ -74,6 +118,7 @@
                         <td><label for="grad"  class="form-label">Graduation Year*</label></td>
                         <td><input type="text" name="grad" id="grad" class="form-control" placeholder="Graduation Year" value="{{a['grad'] if a['grad']}}" required></td>
                     </tr>
+                    {%endif%}
                     <tr class="form-group">
                         <td></td>
                         <td>
@@ -83,9 +128,4 @@
                 </table>
             </form>
         </div>
-    <!-- Bootstrap Script -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  </body>
-</html>
+  {%endblock%}

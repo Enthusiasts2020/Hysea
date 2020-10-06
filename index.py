@@ -4,13 +4,22 @@ import random
 from pymongo import MongoClient
 import datetime
 cluster=MongoClient('mongodb+srv://hiring:hysea@cluster0.pxm7e.mongodb.net/hiring?retryWrites=true&w=majority')
+from twilio.rest import Client
 
+account_sid = 'ACf557040cefaf4ecf1d99fa7f73f54261'
+auth_token = 'f15ba2016580bae84794645d8282e3ef'
+client = Client(account_sid, auth_token)
 db = cluster['Hysea']
 
 profile = db['Profile']
 jobs = db['jobs']
 applications = db['applications']
-
+def clean(number):
+    number = str(number)
+    if len(number)==13:
+        return number
+    if len(number) == 10:
+        return ('+91'+str(number))
 app=Flask(__name__)
 app.secret_key = 'abc'
 def users(name1,name2,mail,mobile,ver,otp,type,clg=None,branch=None,languages=None,tech1=None,tech2=None,age=None,grad=None,password=None):
@@ -43,26 +52,15 @@ def signup():
         if f== None:
             num = random.randint(100000,1000000)
             users(name1=request.form['name1'],name2=request.form['name2'],type = option,mail=request.form['mail'],mobile = request.form['num'],ver = 'F',otp=num)
-            #print(usr.name1,usr.name2,usr.mail)
-
-            # creates SMTP session
-            s = smtplib.SMTP('smtp.gmail.com', 587)
-
-            # start TLS for security
-            s.starttls()
-
-            # Authentication
-            s.login("karthiksurineni2@gmail.com", "ikol@12@goe")
-
-            # message to be sent
             message = "Your OTP is " + str(num)
-            SUBJECT = "no-reply"
-            message = 'Subject: {}\n\n{}'.format(SUBJECT, message)
-            # sending the mail
-            s.sendmail("karthiksurineni2@gmail.com", session['mail'], message)
-
-            # terminating the session
-            s.quit()
+            num1 = clean(request.form['num'])
+            message = client.messages \
+                             .create(
+                                  body= message,
+                                  from_='+13342588630',
+                                 to=num1
+                              )
+            print(message.sid)
 
             return redirect(url_for('auth'))
         else:
@@ -82,8 +80,8 @@ def auth():
             #print(tempotp == f['otp'])
             if f['otp'] == int(tempotp):
                 profile.update_one({"mail":session['mail']},{"$set":{"password":pas1,"ver":'T'}})
-
-                return redirect(url_for('update'))
+                flash("Your Mobile Number has been verified")
+                return redirect(url_for('login'))
             else:
                 flash('Enter Valid OTP')
                 return render_template('auth.html',mail = session['mail'])
@@ -124,7 +122,7 @@ def update():
         flash('Details Updated successfully')
         return redirect(url_for('update'))
     else:
-        return render_template('profile.html',a= profile.find_one({"mail":session['mail']}))
+        return render_template('profile.html',a= profile.find_one({"mail":session['mail']}),b = session['type'])
 @app.route('/create',methods=['GET','POST'])
 def create():
     if request.method == 'POST':
