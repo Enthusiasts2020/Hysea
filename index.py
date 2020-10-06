@@ -127,7 +127,7 @@ def update():
 def create():
     if request.method == 'POST':
         li = list(jobs.find({"mail":session['mail']}))
-        a = {"_id": (session['mail']+str(len(li))),"name":request.form["name"],"place":request.form["place"],"exp":request.form["exp"],"desc":request.form["desc"],"skill":request.form["skill"],"date":request.form["date"],"span":request.form["span"],"sdate":request.form["sdate"]}
+        a = {"_id": (session['mail']+str(len(li))),"name":request.form["name"],"place":request.form["place"],"exp":request.form["exp"],"desc":request.form["desc"],"skill":request.form["skill"],"date":request.form["date"],"span":request.form["span"],"sdate":request.form["sdate"],"mail":session['mail']}
         flash('Created successfully')
         x = jobs.insert_one(a);
         return redirect(url_for('create'))
