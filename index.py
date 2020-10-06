@@ -13,8 +13,8 @@ applications = db['applications']
 
 app=Flask(__name__)
 app.secret_key = 'abc'
-def users(name1,name2,mail,mobile,ver,otp,clg=None,branch=None,languages=None,tech1=None,tech2=None,age=None,grad=None,password=None):
-    doc = {"name1":name1,"name2":name2,"mail":mail,"mobile":mobile,"ver":ver,"otp":otp,"clg":clg,"branch":branch,"languages":languages,"tech1":tech1,"tech2":tech2,"age":age,"grad":grad,"password":password}
+def users(name1,name2,mail,mobile,ver,otp,type,clg=None,branch=None,languages=None,tech1=None,tech2=None,age=None,grad=None,password=None):
+    doc = {"name1":name1,"name2":name2,"mail":mail,"mobile":mobile,"ver":ver,"otp":otp,"type":type,"clg":clg,"branch":branch,"languages":languages,"tech1":tech1,"tech2":tech2,"age":age,"grad":grad,"password":password}
     x = profile.insert_one(doc)
 @app.route('/')
 def home():
@@ -22,6 +22,8 @@ def home():
     #print(a)
     print(session)
     if 'user' in session:
+        if session['type'] == 'org':
+            return render_template('home.html',a = a,app=True)
         return render_template('home.html',a = a,cre = True)
     else:
         return render_template('home.html',a=a)
@@ -32,13 +34,15 @@ def signup():
         #print(request.form['sig'])
         session['user'] = request.form['name1']
         session['mail'] = request.form['mail']
+        option = request.form['options']
+
         #a = request.form['emaill']
         #f = profile.find_one({'email':session['mail']})
         f = None
         #print(f)
         if f== None:
             num = random.randint(100000,1000000)
-            users(name1=request.form['name1'],name2=request.form['name2'],mail=request.form['mail'],mobile = request.form['num'],ver = 'F',otp=num)
+            users(name1=request.form['name1'],name2=request.form['name2'],type = option,mail=request.form['mail'],mobile = request.form['num'],ver = 'F',otp=num)
             #print(usr.name1,usr.name2,usr.mail)
 
             # creates SMTP session
@@ -79,7 +83,7 @@ def auth():
             if f['otp'] == int(tempotp):
                 profile.update_one({"mail":session['mail']},{"$set":{"password":pas1,"ver":'T'}})
 
-                return 'Verified'
+                return redirect(url_for('update'))
             else:
                 flash('Enter Valid OTP')
                 return render_template('auth.html',mail = session['mail'])
@@ -95,6 +99,7 @@ def login():
         #session['user'] = request.form['name1']
         a = request.form['emaill']
         session['mail'] = a
+        #session['type'] = 'org'
         #print(a)
         f = profile.find_one({"mail":a})
         #print(f)
@@ -105,6 +110,7 @@ def login():
             if f["password"] == request.form['pas']:
                 session['user'] = f["name1"]
                 session['password'] = f["password"]
+                session['type'] = f['type']
                 return redirect(url_for('update'))
         flash('Invalid Password')
         render_template('index.html')
@@ -131,23 +137,24 @@ def create():
         return render_template('create.html')
 @app.route('/logout')
 def logout():
-    session.pop(session['user'],None)
-    session.pop(session['mail'],None)
-    session.pop(session['password'],None)
-    print(session)
+    session.clear()
     return redirect(url_for('home'))
 @app.route('/<name>',methods=['GET','POST'])
 def apply(name):
-    f = jobs.find({"_id":name})
+    f = jobs.find_one({"_id":name})
     #print(list(f),'hello')
     if f ==None:
         f = profile.find_one({'mail':name})
         if f !=None:
-            return render_template('display.html',f = list(f))
+            return render_template('display.html',f = f)
     else:
+        if session['type'] == 'org':
+            f = list(applications.find({'job_id':name}))
+            if f != None:
+                return render_template('userlist.html',appl = f,l = len(f))
         if request.method =='POST':
             x = datetime.datetime.now()
-            ap = applications.insert_one({'job_id':name,'applicant':session['mail'],'applied_on':(str(x.day)+'-'+str(x.month)+'-'+str(x.year))})
+            ap = applications.insert_one({'job_id':name,'applicant':session['user'],'applicant id':session['mail'],'applied_on':(str(x.day)+'-'+str(x.month)+'-'+str(x.year))})
             flash('Application Submitted')
         else:
             f = profile.find_one({'mail':session['mail']})

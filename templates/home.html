@@ -10,7 +10,7 @@
     <p>{{messages[0]}}</p>
     {% endif %}
     {% endwith  %}
-    {%if cre%}
+    {%if app%}
     <a href="/create"><button type="button" name="button">Create Job</button></a>
     {%endif%}
     {% for a1 in a%}
@@ -21,6 +21,12 @@
     <p>{{a1['date']}}</p>
     <p>{{a1['span']}}</p>
     <p>{{a1['sdate']}}</p>
+
+    {%if app%}
+    <a href="/{{a1['_id']}}">
+      <button type="button" name="button">View</button>
+    </a>
+    {%endif%}
     {%if cre%}
     <a href="/{{a1['_id']}}">
       <button type="button" name="button">Apply</button>
